@@ -1,25 +1,38 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
+import { GitExtension } from "./ext/git";
+import { GitCommitsProvider } from "./TreeDataProvider";
 
 // This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  const gitExtension = vscode.extensions.getExtension("vscode.git");
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "git-fetch-pruner" is now active!');
+  if (!gitExtension || !gitExtension.isActive) {
+    return;
+  }
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('git-fetch-pruner.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from git-fetch-pruner!');
-	});
+  const gitApi = gitExtension.exports.getAPI(1);
+  console.log(gitApi.repositories[0]);
 
-	context.subscriptions.push(disposable);
+  const gitCommitsProvider = new GitCommitsProvider();
+
+  vscode.window.createTreeView("staleBranches", {
+    treeDataProvider: gitCommitsProvider,
+    showCollapseAll: false,
+  });
+
+  vscode.commands.registerCommand("staleBranches.refresh", () =>
+    gitCommitsProvider.refresh()
+  );
+
+  vscode.commands.registerCommand("staleBranches.copy", () =>
+    gitCommitsProvider.refresh()
+  );
+
+  vscode.commands.registerCommand("staleBranches.deleteBranch", () =>
+    gitCommitsProvider.refresh()
+  );
 }
 
 // This method is called when your extension is deactivated
