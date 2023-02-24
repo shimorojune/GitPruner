@@ -1,37 +1,41 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { GitExtension } from "./ext/git";
-import { GitCommitsProvider } from "./TreeDataProvider";
+import {
+  Branch,
+  UntrackedBranchesProvider,
+} from "./providers/UntrackedBranchesProvider";
 
 // This method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
+  // VARIABLES
   const gitExtension = vscode.extensions.getExtension("vscode.git");
+  const untrackedBranchProvider = new UntrackedBranchesProvider();
 
+  // LOGIC
   if (!gitExtension || !gitExtension.isActive) {
     return;
   }
 
-  const gitApi = gitExtension.exports.getAPI(1);
-  console.log(gitApi.repositories[0]);
+  context.subscriptions.push(
+    // VIEWS
+    vscode.window.createTreeView("untrackedBranches", {
+      treeDataProvider: untrackedBranchProvider,
+      showCollapseAll: false,
+    }),
 
-  const gitCommitsProvider = new GitCommitsProvider();
-
-  vscode.window.createTreeView("staleBranches", {
-    treeDataProvider: gitCommitsProvider,
-    showCollapseAll: false,
-  });
-
-  vscode.commands.registerCommand("staleBranches.refresh", () =>
-    gitCommitsProvider.refresh()
-  );
-
-  vscode.commands.registerCommand("staleBranches.copy", () =>
-    gitCommitsProvider.refresh()
-  );
-
-  vscode.commands.registerCommand("staleBranches.deleteBranch", () =>
-    gitCommitsProvider.refresh()
+    // COMMANDS
+    vscode.commands.registerCommand("untrackedBranches.refresh", () =>
+      untrackedBranchProvider.refresh()
+    ),
+    vscode.commands.registerCommand(
+      "untrackedBranches.copy",
+      (item: Branch) => {
+        untrackedBranchProvider.copyBranchNameToClipboard(item);
+      }
+    ),
+    vscode.commands.registerCommand(
+      "untrackedBranches.deleteBranch",
+      (item: Branch) => untrackedBranchProvider.deleteBranch(item)
+    )
   );
 }
 
