@@ -1,6 +1,6 @@
 <br />
 
-![Logo](https://github.com/shimorojune/git-fetch-pruner/blob/master/src/assets/images/logo/logo-with-text.png?raw=true)
+![Logo](https://github.com/shimorojune/git-fetch-pruner/blob/master/assets/images/logo/logo-with-text.png?raw=true)
 
 <br />
 
@@ -14,7 +14,7 @@ Once installed, the extension creates a panel (named "Untracked Branches") in yo
 
 The panel only shows the local branches which it tracks are stale and do not have a remote branch to track.
 
-![Demo](https://github.com/shimorojune/git-fetch-pruner/blob/master/src/assets/images/demo/panel.png?raw=true)
+![Demo](https://github.com/shimorojune/git-fetch-pruner/blob/master/assets/images/demo/panel.png?raw=true)
 
 ## Release Notes
 

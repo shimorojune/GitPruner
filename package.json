@@ -1,9 +1,13 @@
 {
-  "name": "untracked-branch-tracker",
-  "displayName": "Untracked Branch Tracker",
-  "description": "git fetch --prune on steroids",
-  "version": "1.0.0",
-  "repository": "https://github.com/shimorojune/GitPruner.git",
+  "name": "git-pruner",
+  "displayName": "GitPruner",
+  "description": "View and manage local stale branches",
+  "version": "1.0.1",
+  "icon": "assets/images/logo/logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shimorojune/GitPruner.git"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -11,6 +15,7 @@
     "Other"
   ],
   "activationEvents": [],
+  "publisher": "RohitRaj",
   "main": "./dist/extension.js",
   "contributes": {
     "colors": [
