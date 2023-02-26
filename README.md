@@ -1,6 +1,6 @@
 <br />
 
-![Logo Light](https://github.com/shimorojune/git-fetch-pruner/blob/master/src/assets/images/logo/logo-with-text.png?raw=true#gh-dark-mode-only)
+![Logo](https://github.com/shimorojune/git-fetch-pruner/blob/master/src/assets/images/logo/logo-with-text.png?raw=true)
 
 <br />
 
@@ -13,6 +13,8 @@ Extension to view and manage local stale branches. Mitigates the refresh bug (un
 Once installed, the extension creates a panel (named "Untracked Branches") in your built-in source control view, which is where you can view and manage your local stale branches.
 
 The panel only shows the local branches which it tracks are stale and do not have a remote branch to track.
+
+![Demo](https://github.com/shimorojune/git-fetch-pruner/blob/master/src/assets/images/demo/panel.png?raw=true)
 
 ## Release Notes
 
