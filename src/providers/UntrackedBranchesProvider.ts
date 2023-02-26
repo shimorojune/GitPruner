@@ -1,9 +1,17 @@
 import * as vscode from "vscode";
 import { GitExtension, Ref, Repository } from "../ext/git";
 
+interface Args {
+  setUntrackedBranches: (untrackedBranches: Ref[]) => void;
+}
+
 export class UntrackedBranchesProvider
   implements vscode.TreeDataProvider<Branch>
 {
+  public setUntrackedBranches: Args["setUntrackedBranches"];
+  constructor(args: Args) {
+    this.setUntrackedBranches = args.setUntrackedBranches;
+  }
   // VARIABLES
   // global variable for observer for the respository state
   private observer?: vscode.Disposable;
@@ -101,8 +109,8 @@ export class UntrackedBranchesProvider
           this._observeRepositoryState(repository);
         }
         const allBranches = await repository.getBranches({ remote: true });
-        console.log({ allBranches });
         const untrackedBranches = this._computeUntrackedBranches(allBranches);
+        this.setUntrackedBranches(untrackedBranches);
         const currentBranch = repository.state.HEAD?.name ?? "Unknown Branch";
         return untrackedBranches.map((untrackedBranch) => {
           // VARIABLES
