@@ -6,20 +6,28 @@
 
 # GitPruner
 
-Extension to view and manage local stale branches. Mitigates the refresh bug (untracked branches are not updated locally when its remote branch has been deleted) in traditional tools like [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens).
+Extension to prune the current git repository. Mitigates the refresh bug (untracked branches are not updated locally when its remote branch has been deleted) in traditional tools like [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens).
 
 ## Features
 
-Once installed, the extension creates a panel (named "Untracked Branches") in your built-in source control view, which is where you can view and manage your local stale branches.
+> NOTE: GitPruner needs [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) extension to be installed.
 
-The panel only shows the local branches which it tracks are stale and do not have a remote branch to track.
-
-![Demo](https://github.com/shimorojune/git-fetch-pruner/blob/master/assets/images/demo/panel.png?raw=true)
+Once installed, the extension creates a status bar button "Prune" which can be used to prune the current repository.
 
 ## Release Notes
 
 ### 1.0.0
 
 Initial release of extension with the ability to delete and copy the name of stale branches.
+
+### 1.1.0
+
+- Auto refresh disabled due to unnecessary fetch calls running.
+- Removed "Untracked Braches" since stale branches can be viewed using the GitLens extension.
+- Added "Prune" status bar icon to prune the current repository.
+
+### 1.1.1
+
+- README.md update
 
 **Live long and prosper - without stale branches now!**

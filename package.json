@@ -2,7 +2,7 @@
   "name": "git-pruner",
   "displayName": "GitPruner",
   "description": "View and manage local stale branches",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "icon": "assets/images/logo/logo.png",
   "repository": {
     "type": "git",
@@ -14,85 +14,16 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "publisher": "RohitRaj",
   "main": "./dist/extension.js",
   "contributes": {
-    "colors": [
-      {
-        "id": "untrackedBranches.staleBranch",
-        "description": "Sample",
-        "defaults": {
-          "light": "errorForeground",
-          "dark": "errorForeground"
-        }
-      },
-      {
-        "id": "untrackedBranches.untrackedBranch",
-        "description": "Sample",
-        "defaults": {
-          "light": "gitDecoration.untrackedResourceForeground",
-          "dark": "gitDecoration.untrackedResourceForeground"
-        }
-      }
-    ],
-    "views": {
-      "scm": [
-        {
-          "id": "untrackedBranches",
-          "when": "gitOpenRepositoryCount != 0",
-          "name": "Untracked Branches",
-          "visibility": "visible"
-        }
-      ]
-    },
-    "menus": {
-      "view/item/context": [
-        {
-          "command": "untrackedBranches.deleteBranch",
-          "when": "view == untrackedBranches && viewItem != hideDeleteOption",
-          "group": "inline@1"
-        },
-        {
-          "command": "untrackedBranches.copy",
-          "when": "view == untrackedBranches",
-          "group": "inline@1"
-        },
-        {
-          "command": "untrackedBranches.deleteBranch",
-          "when": "view == untrackedBranches && viewItem != hideDeleteOption"
-        },
-        {
-          "command": "untrackedBranches.copy",
-          "when": "view == untrackedBranches"
-        }
-      ],
-      "view/title": [
-        {
-          "command": "untrackedBranches.refresh",
-          "when": "view == untrackedBranches",
-          "group": "navigation@1"
-        }
-      ]
-    },
     "commands": [
       {
-        "command": "untrackedBranches.refresh",
-        "shortTitle": "Refresh",
-        "title": "Refresh list",
-        "icon": "$(refresh)"
-      },
-      {
-        "command": "untrackedBranches.copy",
-        "shortTitle": "Copy name",
-        "title": "Copy branch name",
-        "icon": "$(clippy)"
-      },
-      {
-        "command": "untrackedBranches.deleteBranch",
-        "shortTitle": "Delete branch",
-        "title": "Delete branch",
-        "icon": "$(trash)"
+        "command": "extension.prune",
+        "title": "Git Prune"
       }
     ]
   },
